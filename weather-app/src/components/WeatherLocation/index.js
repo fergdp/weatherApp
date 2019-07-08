@@ -20,6 +20,16 @@ class WeatherLocation extends Component {
       city: "Cordoba",
       data: data
     };
+    console.log("constructor");
+  }
+
+  componentDidMount() {
+    console.log("componentDidMount");
+    this.handleUpdateClick();
+  }
+  
+  componentDidUpdate() {
+    console.log("componentDidUpdate");
   }
 
   handleUpdateClick = () => {
@@ -32,7 +42,6 @@ class WeatherLocation extends Component {
       .then(data => {
         const newWeather = transformWeather(data);
         console.log(newWeather);
-        debugger;
         this.setState({
           data: newWeather
         });
@@ -40,6 +49,8 @@ class WeatherLocation extends Component {
   };
 
   render() {
+    console.log("render");
+    
     const { city, data } = this.state;
     return (
       <div className="weatherLocationCont">
