@@ -8,8 +8,9 @@ import {
     SUN,
     RAIN,
     SNOW,
-    WINDY,
     FOG,
+    THUNDER,
+    DRIZZLE,
 } from '../../../constants/weathers';
 import './styles.css';
 
@@ -19,14 +20,14 @@ const icons = {
     [SUN]: "day-sunny",
     [RAIN]: "rain",
     [SNOW]: "snow",
-    [WINDY]: "windy",
     [FOG]: "day-fog",
+    [THUNDER]: "day-thunderstore",
+    [DRIZZLE]: "day showers"
 };
 
 const getWeatherIcon = weatherState => {
     const icon = icons[weatherState];
 
-    const sizeIcon = "4x";
     if (icon) {
         return <WeatherIcons className="wicon" name={icon} size="2x" />
     }
