@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import convert from 'convert-units';
 import Location from './Location';
 import WeatherData from './WeatherData';
 import './styles.css';
@@ -6,7 +7,7 @@ import {
     SUN,
 } from './../../constants/weathers';
 
-const location = "Cordoba, AR";
+const location = "Provincia de Córdoba, AR";
 const apiKey = "0d397debf0a0ba538b12007efed4da21";
 const urlBaseWeather = "http://api.openweathermap.org/data/2.5/weather";
 
@@ -25,9 +26,13 @@ class WeatherLocation extends Component {
     constructor() {
         super();
         this.state = {
-            city: "Mendoza",
+            city: "Cordoba",
             data: data,
         };
+    }
+
+    getTemp = kelvin => {
+        return Number(convert(kelvin).from("K").to("C").toFixed(2));
     }
 
     getWeatherState = weatherData => {
@@ -38,10 +43,10 @@ class WeatherLocation extends Component {
         const {humidity, temp} = weatherData.main;
         const {speed} = weatherData.wind;
         const weatherState = this.getWeatherState(weatherData.weather);
-
+        const temperature = this.getTemp(temp);
         const data = {
             humidity,
-            temperature: temp,
+            temperature,
             weatherState,
             wind: `${speed} m/s`,
         }
