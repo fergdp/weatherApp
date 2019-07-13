@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import ForecastItem from './ForecastItem';
 import './styles.css';
 
-const days = [
+/*const days = [
     'lunes',
     'martes',
     'miercoles',
@@ -16,20 +16,50 @@ const data = {
     humidity: 10,
     weatherState: 'normal',
     wind: 'normal',
-}
+}*/
+
+const apiKey = "0d397debf0a0ba538b12007efed4da21";
+const url = "http://api.openweathermap.org/data/2.5/forecast";
 
 class ForecastExtended extends Component {
 
+    constructor() {
+        super();
+        this.state = {
+            forecastData: null,
+        }
+    }
+
+    componentDidMount() {
+        const urlForecast = `${url}?q=${this.props.city}&appid=${apiKey}`;
+
+        fetch(urlForecast).then(
+            data => (data.json()) 
+        ).then(
+            weatherData => {
+                console.log(weatherData);
+                
+            }
+        );
+    }
+
     renderForecasstItemDays() {
-        return days.map(day => <ForecastItem weekDay={day} hour={10} data={data}></ForecastItem>);
+        return "render items";
+        //return days.map(day => <ForecastItem weekDay={day} hour={10} data={data}></ForecastItem>);
+    }
+
+    renderProgress() {
+        return <h3>"Cargando pronostico extendido..."</h3>;
     }
 
     render() {
         const { city } = this.props;
+        const { forecastData } = this.state;
         return (
             <div>
                 <h2 className='forecast-title'>Pronóstico extendido para {city}</h2>
-                {this.renderForecasstItemDays()}
+                {forecastData ? this.renderForecasstItemDays() :
+                    this.renderProgress()}
             </div>
         );
     }
