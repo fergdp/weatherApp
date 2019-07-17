@@ -7,6 +7,8 @@ import { Grid, Col, Row } from 'react-flexbox-grid';
 import './App.css';
 import LocationList from './components/LocationList';
 import ForecastExtended from './components/ForecastExtended';
+import { setcity } from './actions';
+import { store } from './store';
 
 const cities = [
   'Cordoba, ar',
@@ -15,6 +17,7 @@ const cities = [
   'Mexico, mx',
   'Lima, pe',
 ];
+
 class App extends Component {
 
   constructor() {
@@ -29,6 +32,7 @@ class App extends Component {
     this.setState({ city });
     console.log(`handleSelectionLocation ${city}`);
 
+    store.dispatch(setcity(city));
   };
 
   render() {
