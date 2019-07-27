@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import ForecastExtended from '../components/ForecastExtended';
-import { getForecastDataFromCities } from './../reducers/cities';
+import { getForecastDataFromCities, getCity} from './../reducers';
 import { connect } from 'react-redux';
 
 class ForecastExtendedContainer extends Component {
@@ -19,5 +19,5 @@ ForecastExtendedContainer.propTypes = {
     forecastdata: PropTypes.array,
 };
 
-const mapStateToProps = state => ({ city: state.city, forecastData: getForecastDataFromCities(state.cities, state.city) });
+const mapStateToProps = state => ({ city: getCity(state), forecastData: getForecastDataFromCities(state) });
 export default connect(mapStateToProps, null)(ForecastExtendedContainer);
